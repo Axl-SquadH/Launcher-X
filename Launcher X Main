@@ -40,6 +40,13 @@ Tab:AddButton({
 	end    
 })
 
+Tab:AddButton({
+	Name = "C00lkid Gui",
+	Callback = function()
+      		loadstring(game:GetObjects("rbxassetid://16738300563")[1].Source)()
+  	end    
+})
+
 local Tab = Window:MakeTab({
 	Name = "Exploit For Games",
 	Icon = "rbxassetid://4483345998",
@@ -60,6 +67,13 @@ Tab:AddButton({
 
 local Section = Tab:AddSection({
 	Name = "Games"
+})
+
+Tab:AddButton({
+	Name = "Blade Ball Auto Parry | Mobile✅ Pc✅",
+	Callback = function()
+      		loadstring(game:HttpGet("https://scriptblox.com/raw/UPD-Blade-Ball-op-autoparry-with-visualizer-8652"))()
+  	end    
 })
 
 Tab:AddButton({
