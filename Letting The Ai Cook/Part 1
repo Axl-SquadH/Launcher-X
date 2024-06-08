@@ -1,0 +1,246 @@
+-- Boot the Orion Library
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+-- Create a Window
+local Window = OrionLib:MakeWindow({
+    Name = "Custom GUI",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "CustomGUIConfig",
+    IntroEnabled = true,
+    IntroText = "Welcome to Custom GUI",
+    IntroIcon = "rbxassetid://4483345998",
+    Icon = "rbxassetid://4483345998",
+    CloseCallback = function()
+        print("Window Closed!")
+    end
+})
+
+-- Create a Tab for General Settings
+local GeneralTab = Window:MakeTab({
+    Name = "General Settings",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- General Settings Section
+local GeneralSection = GeneralTab:AddSection({
+    Name = "General Controls"
+})
+
+-- Add a Button in General Settings
+GeneralTab:AddButton({
+    Name = "Press Me",
+    Callback = function()
+        print("General Button Pressed!")
+    end
+})
+
+-- Add a Toggle in General Settings
+GeneralTab:AddToggle({
+    Name = "Enable Feature",
+    Default = false,
+    Callback = function(Value)
+        print("Feature Enabled: ", Value)
+    end
+})
+
+-- Create a Tab for Appearance Settings
+local AppearanceTab = Window:MakeTab({
+    Name = "Appearance Settings",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Appearance Settings Section
+local AppearanceSection = AppearanceTab:AddSection({
+    Name = "Appearance Controls"
+})
+
+-- Add a Color Picker in Appearance Settings
+AppearanceTab:AddColorpicker({
+    Name = "Select Color",
+    Default = Color3.fromRGB(255, 0, 0),
+    Callback = function(Value)
+        print("Color Selected: ", Value)
+    end
+})
+
+-- Add a Slider in Appearance Settings
+AppearanceTab:AddSlider({
+    Name = "Adjust Size",
+    Min = 0,
+    Max = 100,
+    Default = 50,
+    Increment = 1,
+    ValueName = "Size",
+    Callback = function(Value)
+        print("Size Adjusted: ", Value)
+    end
+})
+
+-- Create a Tab for Notifications
+local NotificationsTab = Window:MakeTab({
+    Name = "Notifications",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Notifications Section
+local NotificationsSection = NotificationsTab:AddSection({
+    Name = "Notification Controls"
+})
+
+-- Add a Button to trigger a notification
+NotificationsTab:AddButton({
+    Name = "Show Notification",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "Hello!",
+            Content = "This is a custom notification.",
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
+    end
+})
+
+-- Create a Tab for Advanced Settings
+local AdvancedTab = Window:MakeTab({
+    Name = "Advanced Settings",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Advanced Settings Section
+local AdvancedSection = AdvancedTab:AddSection({
+    Name = "Advanced Controls"
+})
+
+-- Add a Textbox in Advanced Settings
+AdvancedTab:AddTextbox({
+    Name = "Enter Text",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(Value)
+        print("Text Entered: ", Value)
+    end
+})
+
+-- Add a Keybind in Advanced Settings
+AdvancedTab:AddBind({
+    Name = "Set Keybind",
+    Default = Enum.KeyCode.G,
+    Hold = false,
+    Callback = function()
+        print("Keybind Pressed!")
+    end
+})
+
+-- Create a Tab for Miscellaneous Settings
+local MiscTab = Window:MakeTab({
+    Name = "Miscellaneous",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Miscellaneous Settings Section
+local MiscSection = MiscTab:AddSection({
+    Name = "Misc Controls"
+})
+
+-- Add a Dropdown in Miscellaneous Settings
+MiscTab:AddDropdown({
+    Name = "Select Option",
+    Default = "Option 1",
+    Options = {"Option 1", "Option 2", "Option 3"},
+    Callback = function(Value)
+        print("Option Selected: ", Value)
+    end
+})
+
+-- Add a Label in Miscellaneous Settings
+MiscTab:AddLabel("This is a label")
+
+-- Create a Tab for Scripts
+local ScriptsTab = Window:MakeTab({
+    Name = "Scripts",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Scripts Section
+local ScriptsSection = ScriptsTab:AddSection({
+    Name = "Script Controls"
+})
+
+-- Fly Script Button
+ScriptsTab:AddButton({
+    Name = "Fly Script",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+        
+        local flying = false
+        local speed = 50
+
+        local fly = function()
+            if flying then
+                return
+            end
+            flying = true
+
+            local bodyGyro = Instance.new("BodyGyro")
+            bodyGyro.P = 9e4
+            bodyGyro.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+            bodyGyro.cframe = character.HumanoidRootPart.CFrame
+            bodyGyro.Parent = character.HumanoidRootPart
+
+            local bodyVelocity = Instance.new("BodyVelocity")
+            bodyVelocity.velocity = Vector3.new(0, 0, 0)
+            bodyVelocity.maxForce = Vector3.new(9e9, 9e9, 9e9)
+            bodyVelocity.Parent = character.HumanoidRootPart
+
+            while flying do
+                bodyGyro.cframe = workspace.CurrentCamera.CFrame
+                bodyVelocity.velocity = workspace.CurrentCamera.CFrame.lookVector * speed
+                wait()
+            end
+
+            bodyGyro:Destroy()
+            bodyVelocity:Destroy()
+        end
+
+        local stopFlying = function()
+            flying = false
+        end
+
+        fly()
+        humanoid.Died:Connect(stopFlying)
+        player.CharacterRemoving:Connect(stopFlying)
+    end
+})
+
+-- Speed Script Button
+ScriptsTab:AddButton({
+    Name = "Speed Script",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+
+        local originalWalkSpeed = humanoid.WalkSpeed
+        humanoid.WalkSpeed = 100
+
+        humanoid.Died:Connect(function()
+            humanoid.WalkSpeed = originalWalkSpeed
+        end)
+
+        player.CharacterRemoving:Connect(function()
+            humanoid.WalkSpeed = originalWalkSpeed
+        end)
+    end
+})
+
+-- Finalize the GUI
+OrionLib:Init()
