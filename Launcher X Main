@@ -70,9 +70,37 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddButton({
+	Name = "Starving Artist",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Utilities/main/Closed/StarvingArtist.lua"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "High School Hoops",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Utilities/main/Closed/StarvingArtist.lua"))()
+  	end    
+})
+
+Tab:AddButton({
 	Name = "Blade Ball Auto Parry | Mobile✅ Pc✅",
 	Callback = function()
-      		loadstring(game:HttpGet("https://scriptblox.com/raw/UPD-Blade-Ball-op-autoparry-with-visualizer-8652"))()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/FFJ1/Roblox-Exploits/main/scripts/autoparry.lua"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Bedwars",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Murder Mystery 2",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/R3TH-PRIV/R3THPRIV/main/loader.lua'))()
   	end    
 })
 
@@ -117,6 +145,12 @@ Tab:AddButton({
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/Melystial/Brookhaven-script/main/brookhaven"))()
 	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Coming Soon",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
 
 local Tab = Window:MakeTab({
