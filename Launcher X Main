@@ -125,6 +125,8 @@ local Tab = Window:MakeTab({
 	PremiumOnly = false
 })
 
+Tab:AddLabel("Discord Server: https://discord.com/invite/zQp5m3aqdJ")
+
 Tab:AddLabel("All Credits Go To All Who Made The Scripts")
 Tab:AddLabel("And This Gui Is Scripted By RenzySquadH")
 Tab:AddLabel("Also Known as ImAxl On TikTok")
