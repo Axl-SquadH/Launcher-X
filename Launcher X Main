@@ -70,6 +70,13 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddButton({
+	Name = "Aura Craft | Unlock All Aura",
+	Callback = function()
+      		loadstring(game:HttpGet('https://pastebin.com/raw/ebtbRCbA'))()
+  	end    
+})
+
+Tab:AddButton({
 	Name = "Starving Artist",
 	Callback = function()
       		loadstring(game:HttpGet("https://raw.githubusercontent.com/itsnoctural/Utilities/main/Closed/StarvingArtist.lua"))()
